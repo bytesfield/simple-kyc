@@ -2,11 +2,10 @@
 
 namespace Bytesfield\SimpleKyc\Pipes;
 
-use Bytesfield\SimpleKyc\Exceptions\DataMismatchException;
-use Bytesfield\SimpleKyc\HttpProcessor;
-use Noodlehaus\Config;
-
 use Closure;
+use Noodlehaus\Config;
+use Bytesfield\SimpleKyc\HttpProcessor;
+use Bytesfield\SimpleKyc\Classes\IdFilter;
 
 class Smile
 {
@@ -20,31 +19,33 @@ class Smile
         $this->partnerId = $config->get('smile.partner_id');
     }
 
-
     /**
      * Process http calls
      * 
      * @param string $method The call method get|post|put|delete|patch
      * @param string $url The url to call
-
      * @param array payload The payload data to send with the call
+     * 
+     * @return \Bytesfield\SimpleKyc\HttpProcessor
      */
-    private function process($method, $url, $payload)
+    private function process($method, $url, $payload): HttpProcessor
     {
-        //HttpProcessor class to handle axios calls
+        //HttpProcessor class to handle http request
         $processor = new HttpProcessor($this->baseUrl, $this->apiKey, $this->handler);
 
         return $processor->process($method, $url, $payload);
     }
-    /**
-     * filter id requests
-     *
-     * @param Closure $next
-     * @return void
-     */
-    public function handle($IdFilter, Closure $next)
-    {
 
+    /**
+     * Handles the ID request
+     * 
+     * @param \Bytesfield\SimpleKyc\Classes\IdFilter
+     * @param Closure $next
+     * 
+     * @return array
+     */
+    public function handle(IdFilter $IdFilter, Closure $next): array
+    {
         if (!$IdFilter->isSuccessful()) {
 
             $secKey = $this->generateKey($this->partnerId, $this->apiKey);
@@ -61,6 +62,7 @@ class Smile
                 'last_name' => $IdFilter->getLastName(),
                 'dob' => $IdFilter->getDOB(),
                 'phone_number' => $IdFilter->getPhoneNumber(),
+                'company' => $IdFilter->getCompany(),
                 'partner_params' => [
                     'job_type' => 5,
                     'job_id' => $jobId,
@@ -73,30 +75,22 @@ class Smile
 
                 $result = $response->getResponse();
 
-                if ($this->verifyResponse($result, $IdFilter)) {
+                $IdFilter->confirmSuccess();
 
-                    $IdFilter->confirmSuccess();
+                $IdFilter->setHandler($this->handler);
 
-                    $IdFilter->setHandler('Smile');
+                $IdFilter->setData([
+                    'handler' => $IdFilter->getHandler(),
+                    'country' => $IdFilter->getCountry(),
+                    'message' => $IdFilter->getIDType() . ' Verified' . ' Successfully',
+                    'data' => $result
+                ]);
 
-                    $IdFilter->setData([
-                        'handler' => $IdFilter->getHandler(),
-                        'country' => $IdFilter->getCountry(),
-                        'message' => $IdFilter->getIDType() . ' Verified' . ' Successfully',
-                        'data' => $result
-                    ]);
-
-                    return $IdFilter->getData();
-                } else {
-                    //Verification Failed
-                    $IdFilter->setError(['error' => $result['ResultText']]);
-
-                    return json_encode(['error' => $IdFilter->getError()]);
-                }
+                return $IdFilter->getData();
             } catch (\Exception $e) {
-                return $IdFilter->setError(['error' => $e->getMessage()]);
+                $IdFilter->setError(['error' => $e->getMessage()]);
 
-                return json_encode(['error' => $IdFilter->getError()]);
+                return $next($IdFilter);
             }
         }
         return $next($IdFilter);
@@ -121,17 +115,5 @@ class Smile
         $secKey = $secKey . "|" . $hashSignature;
 
         return array($secKey, $timestamp);
-    }
-
-    private function verifyResponse($body, $IdFilter): bool
-    {
-        if (!($body['ResultCode'] == 1012)) {
-            return false;
-        }
-        if (!($body['Actions']['Verify_ID_Number'] === 'Verified')) {
-            return false;
-        }
-
-        return true;
     }
 }

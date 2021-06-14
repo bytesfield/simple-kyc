@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     "smile" => [
         'handler' => 'Smile',
         'api_url' => 'https://testapi.smileidentity.com',
@@ -20,6 +19,5 @@ return [
         'api_url' => 'http://102.164.38.38',
         'api_key' => getenv('CREDEQUITY_API_KEY')
     ]
-
 
 ];

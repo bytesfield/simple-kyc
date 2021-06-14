@@ -5,7 +5,10 @@ namespace Bytesfield\SimpleKyc\Services;
 use Noodlehaus\Config;
 use Mpociot\Pipeline\Pipeline;
 use Bytesfield\SimpleKyc\Pipes\Smile;
+use Bytesfield\SimpleKyc\Pipes\Appruve;
 use Bytesfield\SimpleKyc\Classes\IdFilter;
+use Bytesfield\SimpleKyc\Classes\Validation;
+use Bytesfield\SimpleKyc\Pipes\Credequity;
 
 class IdVerification
 {
@@ -28,10 +31,14 @@ class IdVerification
         $this->company = $data->company ?? null;
         $this->registration_number = $data->registration_number ?? null;
 
-        //$this->config = new Config(__DIR__ . '/../config');
+        $this->config = new Config(__DIR__ . '/../config');
+
+        $this->appruveHandler = $this->config->get('appruve.handler');
+        $this->smileHandler = $this->config->get('smile.handler');
+        $this->credequityHandler = $this->config->get('credequity.handler');
     }
 
-    public function verify(string $handler)
+    public function verify()
     {
         $IdFilter = new IdFilter(
             $this->country,
@@ -53,25 +60,33 @@ class IdVerification
         );
 
         $response = null;
-        $pipes = [Smile::class];
-
-        // if ($handler != null) {
-        //     $handler = strtoupper($handler);
-
-        //     if ($handler === strtoupper($this->config->get('smile.handler'))) {
-        //         $smile = new Smile;
-        //         $response = $smile->handle($IdFilter, function () {
-        //             return $this;
-        //         });
-        //     }
-        // } else {
+        $pipes = [Smile::class, Credequity::class, Appruve::class];
 
         $response = (new Pipeline)->send($IdFilter)
             ->through($pipes)
             ->then(function ($result) {
                 return $result;
             });
-        //}
+
+        $executedHandler = strtoupper($IdFilter->getHandler());
+
+        $validation = new Validation();
+
+        //Validate Appruve Handler result
+        if ($executedHandler == strtoupper($this->appruveHandler)) {
+
+            return $validation->validateAppruve($response, $IdFilter);
+        }
+
+        //Validate Smile Handler result
+        if ($executedHandler == strtoupper($this->smileHandler)) {
+            return $validation->validateSmile($response, $IdFilter);
+        }
+
+        //Validate Credequity Handler result
+        if ($executedHandler == strtoupper($this->credequityHandler)) {
+            return $validation->validateCredequity($response, $IdFilter);
+        }
 
         return $response;
     }

@@ -6,11 +6,11 @@ namespace Bytesfield\SimpleKyc\Classes;
 class IdFilter
 {
     public const COUNTRIES = [
-        'Nigeria' => 'NG',
-        'Ghana' => 'GH',
-        'Kenya' => 'KE',
-        'Uganda' => 'UG',
-        'South Africa' => 'ZA'
+        'NIGERIA' => 'NG',
+        'GHANA' => 'GH',
+        'KENYA' => 'KE',
+        'UGANDA' => 'UG',
+        'SOUTH_AFRICA' => 'ZA'
     ];
 
     public const IDVALUES = [
