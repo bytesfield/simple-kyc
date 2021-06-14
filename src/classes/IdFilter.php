@@ -13,6 +13,23 @@ class IdFilter
         'SOUTH_AFRICA' => 'ZA'
     ];
 
+    public const REQUEST_FORMAT = [
+        'ID' => 'id',
+        'COUNTRY' => 'country',
+        'ID_TYPE' => 'id_type',
+        'FIRST_NAME' => 'first_name',
+        'LAST_NAME' => 'last_name',
+        'MIDDLE_NAME' => 'middle_name',
+        'DOB' => 'date_of_birth',
+        'PHONE' => 'phone_number',
+        'PIN' => 'pin',
+        'TIN' => 'tin',
+        'GENDER' => 'gender',
+        'USER_ID' => 'user_id',
+        'COMPANY' => 'company',
+        'REGISTRATION_NUMBER' => 'registration_number'
+    ];
+
     public const IDVALUES = [
         'TYPE_PASSPORT' => 'PASSPORT',
         'TYPE_NATIONAL_ID'  => 'NATIONAL_ID',

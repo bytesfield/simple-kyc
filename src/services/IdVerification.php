@@ -60,7 +60,7 @@ class IdVerification
         );
 
         $response = null;
-        $pipes = [Smile::class, Credequity::class, Appruve::class];
+        $pipes = [Smile::class, Appruve::class, Credequity::class,];
 
         $response = (new Pipeline)->send($IdFilter)
             ->through($pipes)

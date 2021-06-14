@@ -42,14 +42,16 @@ class Credequity
      * 
      * @return array
      */
-    public function handle(IdFilter $IdFilter, Closure $next): array
+    public function handle(IdFilter $IdFilter, Closure $next)
     {
 
         if (!$IdFilter->isSuccessful()) {
 
-            if ($IdFilter->isWithImage()) {
-                $this->getWithImage($IdFilter);
-            } else {
+            if ($IdFilter->getCountry() == IdFilter::COUNTRIES['NIGERIA']) {
+
+                if ($IdFilter->isWithImage()) {
+                    return $this->getWithImage($IdFilter);
+                }
 
                 $idNumber =  $IdFilter->getIDNumber();
                 $firstName =  $IdFilter->getFirstName();
@@ -96,7 +98,7 @@ class Credequity
                     return $this->postData($IdFilter, $body, $url);
                 }
 
-                if ($IdFilter->getIDType() === IdFilter::IDVALUES['TYPE_CUSTOME=>_$PROFILE']) {
+                if ($IdFilter->getIDType() === IdFilter::IDVALUES['TYPE_CUSTOMER_PROFILE']) {
                     $url = '/CredBvn/api/v1/CustomerProfile';
                     //$IdFilter->setCredequityProfile();
                     $profile = $IdFilter->getCredequityProfile();
@@ -128,7 +130,6 @@ class Credequity
 
         $url = '/CredOcr/api/v1/' . $relative;
 
-
         $body = [
             'IdentificationProof' => $IdFilter->getIdentificationProof(),
             'FaceProof' => $IdFilter->getFaceProof()
@@ -146,9 +147,8 @@ class Credequity
      * 
      * @return array
      */
-    private function postData(IdFilter $IdFilter, $body, $url): array
+    private function postData(IdFilter $IdFilter, $body, $url)
     {
-
         try {
             $result =  $this->process('POST', $url, array_filter($body));
 
@@ -167,10 +167,6 @@ class Credequity
                 ]);
 
                 return $IdFilter->getData();
-            } else {
-                $IdFilter->setError(['error' => $response->error]);
-
-                return json_encode(['error' => $IdFilter->getError()]);
             }
         } catch (\Exception $e) {
             $IdFilter->setError(['error' => $e->getMessage()]);

@@ -44,7 +44,7 @@ class Smile
      * 
      * @return array
      */
-    public function handle(IdFilter $IdFilter, Closure $next): array
+    public function handle(IdFilter $IdFilter, Closure $next)
     {
         if (!$IdFilter->isSuccessful()) {
 
@@ -75,18 +75,19 @@ class Smile
 
                 $result = $response->getResponse();
 
-                $IdFilter->confirmSuccess();
+                if ($result['IsFinalResult']) {
+                    $IdFilter->confirmSuccess();
+                    $IdFilter->setHandler($this->handler);
 
-                $IdFilter->setHandler($this->handler);
+                    $IdFilter->setData([
+                        'handler' => $IdFilter->getHandler(),
+                        'country' => $IdFilter->getCountry(),
+                        'message' => $IdFilter->getIDType() . ' Verified' . ' Successfully',
+                        'data' => $result
+                    ]);
 
-                $IdFilter->setData([
-                    'handler' => $IdFilter->getHandler(),
-                    'country' => $IdFilter->getCountry(),
-                    'message' => $IdFilter->getIDType() . ' Verified' . ' Successfully',
-                    'data' => $result
-                ]);
-
-                return $IdFilter->getData();
+                    return $IdFilter->getData();
+                }
             } catch (\Exception $e) {
                 $IdFilter->setError(['error' => $e->getMessage()]);
 

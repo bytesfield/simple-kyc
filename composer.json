@@ -24,6 +24,14 @@
             "src/classes/helpers.php"
         ]
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Bytesfield\\SimpleKyc\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "./vendor/bin/phpunit"
+    },
     "minimum-stability": "dev",
     "require": {
         "php": ">=7.4",

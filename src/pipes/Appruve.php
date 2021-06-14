@@ -87,6 +87,7 @@ class Appruve
 
                 return $IdFilter->getData();
             } catch (\Exception $e) {
+
                 $IdFilter->setError(['error' => $e->getMessage()]);
 
                 return $next($IdFilter);

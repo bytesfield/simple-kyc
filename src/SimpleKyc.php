@@ -19,33 +19,36 @@ class SimpleKyc
         $this->credequityHandler = $this->config->get('credequity.handler');
     }
 
-
-    public function verifyId($payload, ?string $handler = null)
+    /**
+     * Verify ID
+     *
+     * @param array $payload
+     * 
+     * @throws IsNullException|NotFoundException
+     * @return array
+     */
+    public function verifyId(array $payload)
     {
         $requestData = (object) $payload;
-
-        //Checks whether Handler is valid
-        if ($handler != null) {
-            if (!is_string($handler)) {
-                throw new NotFoundException("{$handler} is not a valid string.");
-            }
-
-            $pipes = [
-                strtoupper($this->smileHandler),
-                strtoupper($this->appruveHandler),
-                strtoupper($this->credequityHandler),
-            ];
-
-            if (!in_array(strtoupper($handler), $pipes)) {
-                throw new NotFoundException("{$handler} is not a valid handler.");
-            }
-        }
 
         if (empty((array) $requestData)) {
             throw new IsNullException('Payload must not be empty.');
         }
 
+        $arrayKeyFormats = array_values(IdFilter::REQUEST_FORMAT);
+
+        foreach ($requestData as $key => $data) {
+            if (!in_array($key, $arrayKeyFormats)) {
+                throw new NotFoundException("{$key} is not a supported form field or array key.");
+            }
+        }
+
         $idValue = array_values(IdFilter::IDVALUES);
+
+        if (!array_key_exists('id_type', (array) $requestData)) {
+            throw new IsNullException('id_type key and value must be specified.');
+        }
+
         $idType = $requestData->id_type;
 
         //Checks for valid ID Types
