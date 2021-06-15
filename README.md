@@ -38,20 +38,20 @@ Once `simple-kyc` is installed, you will need to add the following credentials g
 
 _If you are using a hosting service like heroku, ensure to add the above details to your configuration variables._
 
-- [SMILE IDENTITY](https://docs.smileidentity.com/) <br/>
+- [SMILE IDENTITY](https://docs.smileidentity.com/) _Required_<br/>
 
 ```javascript
 SMILE_API_KEY = xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx;
 SMILE_PARTNER_ID = xxxx;
 ```
 
-- [APPRUVE](https://www.appruve.co/) <br/>
+- [APPRUVE](https://www.appruve.co/) _Required_<br/>
 
 ```javascript
 APPRUVE_API_KEY = xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx;
 ```
 
-- [CREDEQUITY](https://credequity.com/) <br/>
+- [CREDEQUITY](https://credequity.com/) _Optional_<br/>
 
 ```javascript
 CREDEQUITY_API_URL = xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx;
