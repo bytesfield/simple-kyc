@@ -6,7 +6,8 @@
     "keywords": [
         "Simple",
         "Kyc",
-        "Customer"
+        "Customer",
+        "Business"
     ],
     "homapage": "https://github.com/bytesfield/simple-kyc",
     "authors": [
@@ -37,8 +38,7 @@
         "php": ">=7.4",
         "guzzlehttp/guzzle": "^7.0.1",
         "mpociot/pipeline": "9999999-dev",
-        "hassankhan/config": "9999999-dev",
-        "php-http/mock-client": "1.4.x-dev"
+        "hassankhan/config": "9999999-dev"
     },
     "require-dev": {
         "phpunit/phpunit": ">=7"
