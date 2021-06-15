@@ -35,8 +35,6 @@ class Appruve
         return $processor->process($method, $url, $payload);
     }
 
-
-
     /**
      * Handles the ID request
      * 
@@ -103,7 +101,7 @@ class Appruve
      * 
      * @return string
      */
-    private function getType(string $type)
+    private function getType(string $type): string
     {
         if ($type === IdFilter::IDVALUES['TYPE_NATIONAL_ID']  || $type === IdFilter::IDVALUES['TYPE_NIN']) {
             return 'national_id';

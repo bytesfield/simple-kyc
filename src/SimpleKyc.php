@@ -2,7 +2,6 @@
 
 namespace Bytesfield\SimpleKyc;
 
-use Noodlehaus\Config;
 use Bytesfield\SimpleKyc\Classes\IdFilter;
 use Bytesfield\SimpleKyc\Services\IdVerification;
 use Bytesfield\SimpleKyc\Exceptions\IsNullException;
@@ -10,14 +9,6 @@ use Bytesfield\SimpleKyc\Exceptions\NotFoundException;
 
 class SimpleKyc
 {
-    public function __construct()
-    {
-        $this->config = new Config(__DIR__ . '/config');
-
-        $this->smileHandler = $this->config->get('smile.handler');
-        $this->appruveHandler = $this->config->get('appruve.handler');
-        $this->credequityHandler = $this->config->get('credequity.handler');
-    }
 
     /**
      * Verify ID
