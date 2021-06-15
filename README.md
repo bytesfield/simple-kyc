@@ -60,9 +60,11 @@ CREDEQUITY_API_URL = xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx;
 ## Usage
 
 ```php
+require 'vendor/autoload.php'; //Exclude this when using Frameworks like Laravel etc
+
 use Bytesfield\SimpleKyc\SimpleKyc;
 
-$simpleKyc = new SimpleKyc;
+$simpleKyc = new SimpleKyc();
 
 $response = $simpleKyc->verifyId($payload = []);
 ```
