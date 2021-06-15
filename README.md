@@ -2,6 +2,12 @@
 
 # Simple KYC
 
+[![GitHub license](https://img.shields.io/github/license/bytesfield/simple-kyc)](https://github.com/bytesfield/simple-kyc/blob/main/LICENSE.md)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/bytesfield/simple-kyc/badges/quality-score.png?b=main)](https://scrutinizer-ci.com/g/bytesfield/simple-kyc/?branch=main)
+[![Build Status](https://scrutinizer-ci.com/g/bytesfield/simple-kyc/badges/build.png?b=main)](https://scrutinizer-ci.com/g/bytesfield/simple-kyc/build-status/main)
+[![Code Intelligence Status](https://scrutinizer-ci.com/g/bytesfield/simple-kyc/badges/code-intelligence.svg?b=main)](https://scrutinizer-ci.com/code-intelligence)
+[![GitHub issues](https://img.shields.io/github/issues/bytesfield/simple-kyc)](https://github.com/bytesfield/simple-kyc/issues)
+
 ## Description
 
 A Know Your Customer (KYC) PHP Package to verify business's customer identity using [SMILE IDENTITY](https://docs.smileidentity.com/), [APPRUVE](https://www.appruve.co/) and [CREDEQUITY](https://credequity.com/) KYC services. This service currently support countries like Nigeria(NG), Ghana(GH), Kenya(KE), Uganda(UG).

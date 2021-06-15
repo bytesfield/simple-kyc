@@ -1,25 +1,16 @@
 # Changelog
 
-All Notable changes to `key-manager` will be documented in this file
+All Notable changes to `simple-kyc` will be documented in this file
 
-## 2021-23-05
-v1.0.alpha
+## 2021-15-06
 
--   Initial release
+v1.0.0
 
-## 2021-23-05
-v1.0.beta
+- Initial Version Release
 
--   Included Exception Handler
--   Fixed API response
+## 2021-15-06
 
-## 2021-24-05
 v1.0.1
 
--   Initial Version Release
-
-## 2021-24-05
-v1.0.2
-
--   Fixed failed Tests
--   Updated config
+- Fixed failed Tests
+- Updated config
