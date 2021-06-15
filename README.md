@@ -1,3 +1,5 @@
+<p align="center"><img src="/images/simple-kyc.jpg" alt="Simple-Kyc Preview"></p>
+
 # Simple KYC
 
 ## Description
