@@ -18,7 +18,7 @@ A Know Your Customer (KYC) PHP Package to verify business's customer identity us
 
 [PHP](https://php.net) 7.4+ and [Composer](https://getcomposer.org) are required.
 
-To get the latest version of Simple-Kyc, simply require it
+To get the latest version of Simple-Kyc, simply require it.
 
 ```bash
 composer require bytesfield/simple-kyc
@@ -60,7 +60,7 @@ CREDEQUITY_API_URL = xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx;
 ## Usage
 
 ```php
-require 'vendor/autoload.php'; //Exclude this when using Frameworks like Laravel etc
+require 'vendor/autoload.php'; //Exclude this when using Frameworks like Laravel etc.
 
 use Bytesfield\SimpleKyc\SimpleKyc;
 
@@ -92,6 +92,12 @@ NIN, BVN, DRIVERS_LICENSE, PASSPORT, TIN, VOTER_CARD;
 ```
 
 ```php
+require 'vendor/autoload.php';
+
+use Bytesfield\SimpleKyc\SimpleKyc;
+
+$simpleKyc = new SimpleKyc();
+
 $payload = [
     'id' => '48126406145',
     'id_type' => 'ID_TYPE_VALUE',
@@ -116,6 +122,12 @@ NIN_SLIP, BVN, DRIVERS_LICENSE, CAC, TIN, VOTER_ID;
 ```
 
 ```php
+require 'vendor/autoload.php';
+
+use Bytesfield\SimpleKyc\SimpleKyc;
+
+$simpleKyc = new SimpleKyc();
+
 $payload = [
     'id' => '48126406145',
     'id_type' => 'ID_TYPE_VALUE',
@@ -140,6 +152,12 @@ NIN, BVN, DRIVERS_LICENSE;
 ```
 
 ```php
+require 'vendor/autoload.php';
+
+use Bytesfield\SimpleKyc\SimpleKyc;
+
+$simpleKyc = new SimpleKyc();
+
 $payload = [
     'id' => '00000000000',
     'id_type' => 'ID_TYPE_VALUE',
@@ -166,6 +184,12 @@ SSNIT, VOTER_ID, DRIVERS_LICENSE;
 ```
 
 ```php
+require 'vendor/autoload.php';
+
+use Bytesfield\SimpleKyc\SimpleKyc;
+
+$simpleKyc = new SimpleKyc();
+
 $payload = [
     'id' => '48126406145',
     'id_type' => 'ID_TYPE_VALUE',
@@ -189,6 +213,12 @@ SSNIT, TIN, DRIVERS_LICENSE, PASSPORT, VOTER_CARD;
 ```
 
 ```php
+require 'vendor/autoload.php';
+
+use Bytesfield\SimpleKyc\SimpleKyc;
+
+$simpleKyc = new SimpleKyc();
+
 $payload = [
     'id' => '48126406145',
     'id_type' => 'ID_TYPE_VALUE',
@@ -214,6 +244,12 @@ ALIEN_CARD, NATIONAL_ID, PASSPORT;
 ```
 
 ```php
+require 'vendor/autoload.php';
+
+use Bytesfield\SimpleKyc\SimpleKyc;
+
+$simpleKyc = new SimpleKyc();
+
 $payload = [
     'id' => '48126406145',
     'id_type' => 'ID_TYPE_VALUE',
@@ -237,6 +273,12 @@ NATIONAL_ID, KRA, PASSPORT;
 ```
 
 ```php
+require 'vendor/autoload.php';
+
+use Bytesfield\SimpleKyc\SimpleKyc;
+
+$simpleKyc = new SimpleKyc();
+
 $payload = [
     'id' => '48126406145',
     'id_type' => 'ID_TYPE_VALUE',
@@ -264,6 +306,12 @@ NATIONAL_ID, NATIONAL_ID_NO_PHOTO;
 ```
 
 ```php
+require 'vendor/autoload.php';
+
+use Bytesfield\SimpleKyc\SimpleKyc;
+
+$simpleKyc = new SimpleKyc();
+
 $payload = [
     'id' => '48126406145',
     'id_type' => 'ID_TYPE_VALUE',
@@ -291,6 +339,12 @@ TELCO_SUBSCRIBER;
 ```
 
 ```php
+require 'vendor/autoload.php';
+
+use Bytesfield\SimpleKyc\SimpleKyc;
+
+$simpleKyc = new SimpleKyc();
+
 $payload = [
     'id' => '48126406145',
     'id_type' => 'ID_TYPE_VALUE',
